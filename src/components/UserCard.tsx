@@ -1,36 +1,31 @@
-import { Avatar, Box, Card, Flex, Text } from "@radix-ui/themes";
-import { MouseEvent, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { Avatar, Box, Card, Flex, Text, Tooltip } from "@radix-ui/themes";
+import { MouseEvent, ReactNode } from "react";
 import styled from "styled-components";
 import { StatusMap } from "../constants";
 import { User } from "../db";
-import { updateUser } from "../requests/user";
-import Button from "./Button";
+import IconButton from "./IconButton";
+
+type Action = {
+  key: string;
+  label: string;
+  icon: ReactNode;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+};
+
+interface IUserCard extends Omit<User, "status"> {
+  status?: "online" | "offline";
+  onClick?: () => void;
+  actions?: Action[];
+}
 
 const Wrapper = styled(Card)`
   width: 400px;
   cursor: pointer;
 `;
 
-export default function UserCard(props: User) {
-  const navigate = useNavigate();
-
-  const handleSelectUser = useCallback(() => {
-    navigate(`/users/${props.id}/friends`);
-  }, [navigate, props.id]);
-
-  const handleChangeStatus = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      const status = props.status === "online" ? "offline" : "online";
-
-      updateUser(props.id!, status);
-    },
-    [props.id, props.status]
-  );
-
+export default function UserCard(props: IUserCard) {
   return (
-    <Wrapper onClick={handleSelectUser}>
+    <Wrapper onClick={props.onClick}>
       <Flex gap="3" align="center" justify="between">
         <Flex gap="3" align="center">
           {props.avatar && (
@@ -46,12 +41,22 @@ export default function UserCard(props: User) {
           </Box>
         </Flex>
         <Box>
-          <Text as="div" size="2" color="gray" align="center">
-            {StatusMap[props.status].label}
-          </Text>
-          <Button onClick={handleChangeStatus}>
-            {StatusMap[props.status].action}
-          </Button>
+          {props.status && (
+            <Text as="div" size="2" color="gray" align="center">
+              {StatusMap[props.status].label}
+            </Text>
+          )}
+          {props.actions && (
+            <Flex gap="3" justify="end">
+              {props.actions.map((action) => (
+                <Tooltip key={action.key} content={action.label}>
+                  <IconButton data-id={props.id} onClick={action.onClick}>
+                    {action.icon}
+                  </IconButton>
+                </Tooltip>
+              ))}
+            </Flex>
+          )}
         </Box>
       </Flex>
     </Wrapper>

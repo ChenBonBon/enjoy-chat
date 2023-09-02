@@ -13,7 +13,7 @@ export default [
   },
   {
     key: "chat",
-    path: "/chat",
+    path: "/chats/:id",
     element: <Chat />,
   },
 ];
