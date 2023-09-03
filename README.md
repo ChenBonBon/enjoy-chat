@@ -1,27 +1,53 @@
-# React + TypeScript + Vite
+# EnjoyChat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一款简单的基于 React 的在线聊天室。
 
-Currently, two official plugins are available:
+## 安装说明
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+首先将代码克隆至本地任意目录
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+git clone git@github.com:ChenBonBon/enjoy-chat.git
+cd enjoy-chat
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+进入 `enjoy-chat` 源码目录后，在根目录安装依赖，这里推荐使用 `pnpm` 进行安装
+
+```bash
+# 推荐
+pnpm install
+```
+
+```bash
+npm install
+```
+
+```bash
+yarn install
+```
+
+依赖安装完成后，可以直接使用 `npm run dev` 运行
+
+```bash
+npm run dev
+```
+
+运行成功后，会自动打开浏览器，默认端口号为 `5173`
+
+## 使用指南
+
+首次访问 EnjoyChat 时，由于并没有初始化数据库，所以页面右上角会显示 `初始化用户` 按钮，点击后会向数据库中插入默认的 4 条记录。
+
+> 初始化用户数据位于 `src/constants.ts` 文件
+
+完成初始化用户后，页面会显示默认的 4 位用户，可以点击上线/下线按钮对用户进行上线/下线。点击除上线/下线按钮之外的其他位置，会有登录确认对话框，点击确认可以使该用户上线，并自动以该用户进行登录。
+
+> 上线/下线功能只是数据库中用户状态的变更，只会对用户列表、好友列表和聊天页面的展示内容产生影响
+
+用户登录后会自动跳转至用好友列表页面。好友列表页面会展示好友列表和推荐的人列表，可以点击好友中的发送消息图标进入聊天页面，也可以点击推荐的人中的添加好友图标添加好友。
+
+> 添加好友功能为单向逻辑
+
+进入聊天页面后，顶部会显示好友登录状态及简单用户信息，可以在底部输入框中输入文本，可以点击发送按钮或使用回车键发送。在文本框尾部有一个图片图标，点击图片图标可以选择一张照片并立即发送。用户可以对已发送的消息进行点赞/取消点赞、撤回和删除，可以对已接收的消息进行点赞/取消点赞和删除。
+
+> 点击图片可以放大图片

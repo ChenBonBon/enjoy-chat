@@ -7,6 +7,8 @@ const Wrapper = styled.div`
   height: 100vh;
   padding: 36px 48px;
   box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
 `;
 
 function App() {
