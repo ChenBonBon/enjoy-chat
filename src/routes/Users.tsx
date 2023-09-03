@@ -25,9 +25,11 @@ export default function Users() {
   return (
     <div>
       <Heading as="h1">用户列表</Heading>
-      <Flex justify="end" align="center">
-        <Button onClick={importUser}>导入用户</Button>
-      </Flex>
+      {(!users || users.length === 0) && (
+        <Flex justify="end" align="center">
+          <Button onClick={importUser}>初始化用户</Button>
+        </Flex>
+      )}
       <Flex mt="5" direction="column" gap="3" align="center">
         {userList}
       </Flex>
