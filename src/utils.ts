@@ -41,3 +41,7 @@ export function scrollToBottomObserverCallback(
     }
   }
 }
+
+export function blank() {
+  return;
+}

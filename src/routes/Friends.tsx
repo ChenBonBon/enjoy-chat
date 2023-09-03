@@ -10,6 +10,7 @@ import useRecommend from "../hooks/useRecommend";
 import { addChat } from "../requests/chat";
 import { addRelation } from "../requests/relation";
 import { updateUser } from "../requests/user";
+import { blank } from "../utils";
 
 export default function Friends() {
   const navigate = useNavigate();
@@ -25,13 +26,7 @@ export default function Friends() {
         {
           key: "message",
           label: "发送消息",
-          icon: (
-            <MessageIcon
-              onClick={() => {
-                return;
-              }}
-            />
-          ),
+          icon: <MessageIcon onClick={blank} />,
           onClick: async () => {
             const chatId = await addChat(from, userId);
 
@@ -51,13 +46,7 @@ export default function Friends() {
         {
           key: "add",
           label: "添加好友",
-          icon: (
-            <AddUserIcon
-              onClick={() => {
-                return;
-              }}
-            />
-          ),
+          icon: <AddUserIcon onClick={blank} />,
           onClick: async () => {
             await addRelation(from, userId, Date.now());
           },

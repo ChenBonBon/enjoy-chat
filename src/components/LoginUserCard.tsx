@@ -8,6 +8,7 @@ import Button from "./Button";
 import DownIcon from "./Icon/Down";
 import UpIcon from "./Icon/Up";
 import UserCard from "./UserCard";
+import { blank } from "../utils";
 
 export function LoginUserCard(props: User) {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export function LoginUserCard(props: User) {
           {
             key: "changeStatus",
             label: StatusMap[props.status].action,
-            icon: props.status === "online" ? <DownIcon /> : <UpIcon />,
+            icon: props.status === "online" ? <DownIcon onClick={blank} /> : <UpIcon onClick={blank} />,
             onClick: handleChangeStatus,
           },
         ]}
