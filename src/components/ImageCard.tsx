@@ -1,9 +1,9 @@
-import { Portal, Text } from "@radix-ui/themes";
-import { useCallback, useState } from "react";
+import { Flex, Portal } from "@radix-ui/themes";
+import { useState } from "react";
 import { styled } from "styled-components";
 import Content from "./Content";
-import CloseIcon from "./Icon/Close";
-import LikeIcon from "./Icon/Like";
+import LikeIcon from "./LikeIcon";
+import ZoomedImage from "./ZoomedImage";
 
 interface IImageCard {
   image: string;
@@ -13,62 +13,35 @@ interface IImageCard {
   likeId?: number;
 }
 
-const ImageWrapper = styled.div`
-  position: relative;
-`;
-
 const Image = styled.img`
-  width: 100%;
-`;
-
-const ZoomedImage = styled.div`
-  position: fixed;
-  width: 80vw;
-  height: 60vh;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const ZoomedImageCloseIcon = styled(CloseIcon)`
-  position: absolute;
-  top: 24px;
-  right: 24px;
-`;
-
-const ImageLikeIcon = styled(LikeIcon)`
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
+  width: calc(100% - 64px);
 `;
 
 export default function ImageCard(props: IImageCard) {
   const [zoomed, setZoomed] = useState(false);
 
-  const zoomIn = useCallback(() => {
+  function zoomIn() {
     setZoomed(true);
-  }, []);
+  }
 
-  const zoomOut = useCallback(() => {
+  function zoomOut() {
     setZoomed(false);
-  }, []);
+  }
 
   return (
     <Content {...props}>
-      <ImageWrapper>
-        {props.likeId && (
-          <Text color={props.myMessage ? "green" : "gray"}>
-            <ImageLikeIcon />
-          </Text>
+      <Flex align="center" gap="3">
+        {props.myMessage && (
+          <LikeIcon $active={typeof props.likeId !== "undefined"} />
         )}
-        <Image src={props.image} onClick={zoomIn} />
-      </ImageWrapper>
+        <Image src={props.image} onClick={zoomIn} style={{ flex: 1 }} />
+        {!props.myMessage && (
+          <LikeIcon $active={typeof props.likeId !== "undefined"} />
+        )}
+      </Flex>
       {zoomed && (
         <Portal>
-          <ZoomedImage>
-            <ZoomedImageCloseIcon onClick={zoomOut} />
-            <Image src={props.image} />
-          </ZoomedImage>
+          <ZoomedImage image={props.image} onClose={zoomOut} />
         </Portal>
       )}
     </Content>

@@ -27,3 +27,20 @@
 ### Changed
 
 - UserCard 新增登录弹窗
+
+## [0.0.3] - 2023-09-03
+
+### Added
+
+- 新增输入框回车后发送
+
+### Changed
+
+- 将部分逻辑提取至自定义 hooks
+- 将部分函数提取至 utils
+- 移除大量无效 useCallback
+- 固定 package 版本
+
+### Fixed
+
+- 修复 Input 组件在受控情况下无法输入中文

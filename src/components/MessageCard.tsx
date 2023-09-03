@@ -1,6 +1,6 @@
-import { Callout } from "@radix-ui/themes";
+import { Callout, Flex } from "@radix-ui/themes";
 import Content from "./Content";
-import LikeIcon from "./Icon/Like";
+import LikeIcon from "./LikeIcon";
 
 interface IMessageCard {
   text: string;
@@ -13,14 +13,20 @@ interface IMessageCard {
 export default function MessageCard(props: IMessageCard) {
   return (
     <Content {...props}>
-      <Callout.Root color={props.myMessage ? "green" : "gray"}>
-        {props.likeId && (
-          <Callout.Icon>
-            <LikeIcon />
-          </Callout.Icon>
+      <Flex align="center" gap="3">
+        {props.myMessage && (
+          <LikeIcon $active={typeof props.likeId !== "undefined"} />
         )}
-        <Callout.Text>{props.text}</Callout.Text>
-      </Callout.Root>
+        <Callout.Root
+          color={props.myMessage ? "green" : "gray"}
+          style={{ flex: 1 }}
+        >
+          <Callout.Text>{props.text}</Callout.Text>
+        </Callout.Root>
+        {!props.myMessage && (
+          <LikeIcon $active={typeof props.likeId !== "undefined"} />
+        )}
+      </Flex>
     </Content>
   );
 }

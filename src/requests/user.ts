@@ -24,3 +24,7 @@ export async function updateUser(id: number, status: "online" | "offline") {
     console.error("UpdateUser error: ", error);
   }
 }
+
+export async function getUser(id: number) {
+  return db.users.where("id").equals(id).first();
+}

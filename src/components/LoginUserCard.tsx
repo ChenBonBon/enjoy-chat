@@ -1,5 +1,5 @@
 import { AlertDialog, Flex } from "@radix-ui/themes";
-import { MouseEvent, useCallback, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StatusMap } from "../constants";
 import { User } from "../db";
@@ -13,30 +13,27 @@ export function LoginUserCard(props: User) {
   const navigate = useNavigate();
   const [opened, setOpened] = useState(false);
 
-  const open = useCallback(() => {
+  function open() {
     setOpened(true);
-  }, []);
+  }
 
-  const cancel = useCallback(() => {
+  function cancel() {
     setOpened(false);
-  }, []);
+  }
 
-  const handleSelectUser = useCallback(async () => {
+  async function handleSelectUser() {
     await updateUser(props.id!, "online");
-    setOpened(false);
+    cancel();
     localStorage.setItem("userId", props.id!.toString());
     navigate(`/users/${props.id}/friends`);
-  }, [navigate, props.id]);
+  }
 
-  const handleChangeStatus = useCallback(
-    async (event: MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      const status = props.status === "online" ? "offline" : "online";
+  async function handleChangeStatus(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    const status = props.status === "online" ? "offline" : "online";
 
-      await updateUser(props.id!, status);
-    },
-    [props.id, props.status]
-  );
+    await updateUser(props.id!, status);
+  }
 
   return (
     <AlertDialog.Root open={opened}>
