@@ -8,8 +8,8 @@ interface IZoomedImage {
 
 const Wrapper = styled.div`
   position: fixed;
-  width: 80vw;
-  height: 60vh;
+  width: 100vmin;
+  height: 80vmin;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
