@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import styled from "styled-components";
-import routes from "./routes";
+import { Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
+import routes from './routes';
 
 const Wrapper = styled.div`
   width: 100vw;

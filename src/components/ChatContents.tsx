@@ -1,16 +1,16 @@
-import { ContextMenu, Flex, ScrollArea } from "@radix-ui/themes";
-import { useEffect, useRef } from "react";
-import MessageCard from "../components/MessageCard";
-import { ChatContent } from "../db";
-import useWindowSize from "../hooks/useWindowSize";
+import { ContextMenu, Flex, ScrollArea } from '@radix-ui/themes';
+import { useEffect, useRef } from 'react';
+import MessageCard from '../components/MessageCard';
+import { ChatContent } from '../db';
+import useWindowSize from '../hooks/useWindowSize';
 import {
   addChatDelete,
   addChatLike,
   removeChatContent,
   removeChatLike,
-} from "../requests/chat";
-import { getCanRevoke, scrollToBottomObserverCallback } from "../utils";
-import ImageCard from "./ImageCard";
+} from '../requests/chat';
+import { getCanRevoke, scrollToBottomObserverCallback } from '../utils';
+import ImageCard from './ImageCard';
 
 export interface IContent extends ChatContent {
   likeId?: number;
@@ -27,7 +27,7 @@ function revoke(id: number) {
 }
 
 export default function ChatContents(props: IChatContents) {
-  const currentUserId = Number(localStorage.getItem("userId"));
+  const currentUserId = Number(localStorage.getItem('userId'));
   const chatContentRef = useRef<HTMLDivElement>(null);
 
   const { windowSize } = useWindowSize();
@@ -56,10 +56,10 @@ export default function ChatContents(props: IChatContents) {
 
   return (
     <ScrollArea
-      scrollbars="vertical"
+      scrollbars='vertical'
       style={{ height: windowSize.height - 72 - 64 - 25 - 32 }}
     >
-      <Flex direction="column" gap="5" px="5" py="4" ref={chatContentRef}>
+      <Flex direction='column' gap='5' px='5' py='4' ref={chatContentRef}>
         {(props.contents ?? []).map((chatContent) => (
           <ContextMenu.Root key={chatContent.id}>
             <ContextMenu.Trigger>
@@ -86,7 +86,7 @@ export default function ChatContents(props: IChatContents) {
                   toggleLike(chatContent.id!, chatContent.likeId);
                 }}
               >
-                {chatContent.likeId ? "取消点赞" : "点赞"}
+                {chatContent.likeId ? '取消点赞' : '点赞'}
               </ContextMenu.Item>
               <ContextMenu.Separator />
               {getCanRevoke(chatContent.createdAt) &&

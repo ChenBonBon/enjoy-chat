@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
 export default function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -14,10 +14,10 @@ export default function useWindowSize() {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize, false);
+    window.addEventListener('resize', handleResize, false);
 
     return () => {
-      window.removeEventListener("resize", handleResize, false);
+      window.removeEventListener('resize', handleResize, false);
     };
   }, [handleResize]);
 

@@ -1,11 +1,11 @@
-import Dexie, { Table } from "dexie";
+import Dexie, { Table } from 'dexie';
 
 export interface User {
   id?: number;
   name: string;
   description?: string;
   avatar?: string;
-  status: "online" | "offline";
+  status: 'online' | 'offline';
 }
 
 export interface UserRelation {
@@ -52,14 +52,14 @@ export class DB extends Dexie {
   chatDeletes!: Table<ChatDelete>;
 
   constructor() {
-    super("enjoy-chat");
+    super('enjoy-chat');
     this.version(1).stores({
-      users: "++id, name, status",
-      userRelations: "++id, from, to, [from+to]",
-      chats: "++id, from, to, [from+to]",
-      chatContents: "++id, chatId",
-      chatLikes: "++id, chatContentId, createdBy, [chatContentId+createdBy]",
-      chatDeletes: "++id, chatContentId, createdBy, [chatContentId+createdBy]",
+      users: '++id, name, status',
+      userRelations: '++id, from, to, [from+to]',
+      chats: '++id, from, to, [from+to]',
+      chatContents: '++id, chatId',
+      chatLikes: '++id, chatContentId, createdBy, [chatContentId+createdBy]',
+      chatDeletes: '++id, chatContentId, createdBy, [chatContentId+createdBy]',
     });
   }
 }

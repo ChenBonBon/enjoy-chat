@@ -1,9 +1,9 @@
-import { Avatar, Box, Card, Flex, Text, Tooltip } from "@radix-ui/themes";
-import { MouseEvent, ReactNode } from "react";
-import styled from "styled-components";
-import { StatusMap } from "../constants";
-import { User } from "../db";
-import IconButton from "./IconButton";
+import { Avatar, Box, Card, Flex, Text, Tooltip } from '@radix-ui/themes';
+import { MouseEvent, ReactNode } from 'react';
+import styled from 'styled-components';
+import { StatusMap } from '../constants';
+import { User } from '../db';
+import IconButton from './IconButton';
 
 type Action = {
   key: string;
@@ -12,8 +12,8 @@ type Action = {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
-interface IUserCard extends Omit<User, "status"> {
-  status?: "online" | "offline";
+interface IUserCard extends Omit<User, 'status'> {
+  status?: 'online' | 'offline';
   onClick?: () => void;
   actions?: Action[];
 }
@@ -26,28 +26,28 @@ const Wrapper = styled(Card)`
 export default function UserCard(props: IUserCard) {
   return (
     <Wrapper onClick={props.onClick}>
-      <Flex gap="3" align="center" justify="between">
-        <Flex gap="3" align="center">
+      <Flex gap='3' align='center' justify='between'>
+        <Flex gap='3' align='center'>
           {props.avatar && (
-            <Avatar size="3" src={props.avatar} radius="full" fallback="T" />
+            <Avatar size='3' src={props.avatar} radius='full' fallback='T' />
           )}
           <Box>
-            <Text as="div" size="2" weight="bold">
+            <Text as='div' size='2' weight='bold'>
               {props.name}
             </Text>
-            <Text as="div" size="2" color="gray">
+            <Text as='div' size='2' color='gray'>
               {props.description}
             </Text>
           </Box>
         </Flex>
         <Box>
           {props.status && (
-            <Text as="div" size="2" color="gray" align="center">
+            <Text as='div' size='2' color='gray' align='center'>
               {StatusMap[props.status].label}
             </Text>
           )}
           {props.actions && (
-            <Flex gap="3" justify="end">
+            <Flex gap='3' justify='end'>
               {props.actions.map((action) => (
                 <Tooltip key={action.key} content={action.label}>
                   <IconButton data-id={props.id} onClick={action.onClick}>

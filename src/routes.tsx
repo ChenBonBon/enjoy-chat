@@ -1,19 +1,19 @@
-import { Chat, Friends, Users } from "./routes/index";
+import { Chat, Friends, Users } from './routes/index';
 
 export default [
   {
-    key: "users",
-    path: "/",
+    key: 'users',
+    path: '/',
     element: <Users />,
   },
   {
-    key: "friends",
-    path: "/users/:id/friends",
+    key: 'friends',
+    path: '/users/:id/friends',
     element: <Friends />,
   },
   {
-    key: "chat",
-    path: "/chats/:id",
+    key: 'chat',
+    path: '/chats/:id',
     element: <Chat />,
   },
 ];

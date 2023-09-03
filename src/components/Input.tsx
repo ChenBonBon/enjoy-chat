@@ -1,4 +1,4 @@
-import { TextField } from "@radix-ui/themes";
+import { TextField } from '@radix-ui/themes';
 import {
   ChangeEvent,
   CompositionEvent,
@@ -6,7 +6,7 @@ import {
   ReactNode,
   useEffect,
   useRef,
-} from "react";
+} from 'react';
 
 interface IInput {
   value?: string;
@@ -41,7 +41,7 @@ export default function Input(props: IInput) {
   }
 
   function handleKeyUp(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       if (props.onEnter) {
         props.onEnter();
       }
@@ -50,7 +50,7 @@ export default function Input(props: IInput) {
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.value = props.value ?? "";
+      inputRef.current.value = props.value ?? '';
     }
   }, [props.value]);
 
@@ -58,7 +58,7 @@ export default function Input(props: IInput) {
     <TextField.Root style={{ flex: 1 }}>
       <TextField.Input
         ref={inputRef}
-        placeholder="请输入…"
+        placeholder='请输入…'
         onCompositionStart={handleCompositionStart}
         onCompositionEnd={handleCompositionEnd}
         onChange={handleChange}

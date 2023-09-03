@@ -1,24 +1,24 @@
-import { useLiveQuery } from "dexie-react-hooks";
-import { useEffect, useState } from "react";
-import { IContent } from "../components/ChatContents";
-import { db } from "../db";
+import { useLiveQuery } from 'dexie-react-hooks';
+import { useEffect, useState } from 'react';
+import { IContent } from '../components/ChatContents';
+import { db } from '../db';
 
 export default function useContents(userId: number, chatId: number) {
   const [contents, setContents] = useState<IContent[]>([]);
 
   const chatContents = useLiveQuery(async () => {
     return await db.chatContents
-      .where("chatId")
+      .where('chatId')
       .equals(chatId)
-      .sortBy("createdAt");
+      .sortBy('createdAt');
   }, [chatId]);
 
   const myChatLikes = useLiveQuery(async () => {
     const chatContentIds = (chatContents ?? []).map(
-      (chatContent) => chatContent.id!
+      (chatContent) => chatContent.id!,
     );
     return await db.chatLikes
-      .where("chatContentId")
+      .where('chatContentId')
       .anyOf(chatContentIds)
       .and((item) => item.createdBy === userId)
       .toArray();
@@ -26,10 +26,10 @@ export default function useContents(userId: number, chatId: number) {
 
   const myChatDeletes = useLiveQuery(async () => {
     const chatContentIds = (chatContents ?? []).map(
-      (chatContent) => chatContent.id!
+      (chatContent) => chatContent.id!,
     );
     return await db.chatDeletes
-      .where("chatContentId")
+      .where('chatContentId')
       .anyOf(chatContentIds)
       .and((item) => item.createdBy === userId)
       .toArray();
@@ -44,7 +44,7 @@ export default function useContents(userId: number, chatId: number) {
 
       if (myChatLikes) {
         const like = myChatLikes.find(
-          (item) => item.chatContentId === chatContent.id
+          (item) => item.chatContentId === chatContent.id,
         );
         if (like) {
           newContent.likeId = like.id!;
@@ -53,7 +53,7 @@ export default function useContents(userId: number, chatId: number) {
 
       if (myChatDeletes) {
         const deleteItem = myChatDeletes.find(
-          (item) => item.chatContentId === chatContent.id
+          (item) => item.chatContentId === chatContent.id,
         );
         if (deleteItem) {
           continue;

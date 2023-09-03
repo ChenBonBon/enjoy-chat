@@ -1,16 +1,16 @@
-import { Flex, Heading } from "@radix-ui/themes";
-import { useCallback, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Button from "../components/Button";
-import AddUserIcon from "../components/Icon/AddUser";
-import MessageIcon from "../components/Icon/Message";
-import UserCard from "../components/UserCard";
-import useFriends from "../hooks/useFriends";
-import useRecommend from "../hooks/useRecommend";
-import { addChat } from "../requests/chat";
-import { addRelation } from "../requests/relation";
-import { updateUser } from "../requests/user";
-import { blank } from "../utils";
+import { Flex, Heading } from '@radix-ui/themes';
+import { useCallback, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import Button from '../components/Button';
+import AddUserIcon from '../components/Icon/AddUser';
+import MessageIcon from '../components/Icon/Message';
+import UserCard from '../components/UserCard';
+import useFriends from '../hooks/useFriends';
+import useRecommend from '../hooks/useRecommend';
+import { addChat } from '../requests/chat';
+import { addRelation } from '../requests/relation';
+import { updateUser } from '../requests/user';
+import { blank } from '../utils';
 
 export default function Friends() {
   const navigate = useNavigate();
@@ -24,8 +24,8 @@ export default function Friends() {
     (userId: number) => {
       return [
         {
-          key: "message",
-          label: "发送消息",
+          key: 'message',
+          label: '发送消息',
           icon: <MessageIcon onClick={blank} />,
           onClick: async () => {
             const chatId = await addChat(from, userId);
@@ -37,15 +37,15 @@ export default function Friends() {
         },
       ];
     },
-    [from, navigate]
+    [from, navigate],
   );
 
   const getRecommendUserActions = useCallback(
     (userId: number) => {
       return [
         {
-          key: "add",
-          label: "添加好友",
+          key: 'add',
+          label: '添加好友',
           icon: <AddUserIcon onClick={blank} />,
           onClick: async () => {
             await addRelation(from, userId, Date.now());
@@ -53,7 +53,7 @@ export default function Friends() {
         },
       ];
     },
-    [from]
+    [from],
   );
 
   const friendList = useMemo(() => {
@@ -81,19 +81,19 @@ export default function Friends() {
   }, [getRecommendUserActions, recommendUsers]);
 
   async function back() {
-    window.localStorage.removeItem("userId");
-    await updateUser(from, "offline");
+    window.localStorage.removeItem('userId');
+    await updateUser(from, 'offline');
     navigate(`/`);
   }
 
   return (
     <>
-      <Button variant="ghost" onClick={back}>
+      <Button variant='ghost' onClick={back}>
         返回
       </Button>
       <div>
-        <Heading as="h1">好友列表</Heading>
-        <Flex mt="5" direction="column" gap="3" align="center">
+        <Heading as='h1'>好友列表</Heading>
+        <Flex mt='5' direction='column' gap='3' align='center'>
           {friends && friends.length > 0 ? (
             friendList
           ) : (
@@ -102,8 +102,8 @@ export default function Friends() {
         </Flex>
       </div>
       <div>
-        <Heading as="h1">推荐的人</Heading>
-        <Flex mt="5" direction="column" gap="3" align="center">
+        <Heading as='h1'>推荐的人</Heading>
+        <Flex mt='5' direction='column' gap='3' align='center'>
           {recommendUserList}
         </Flex>
       </div>

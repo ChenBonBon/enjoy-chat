@@ -1,7 +1,7 @@
-import { ChangeEvent, useRef } from "react";
-import { User } from "../db";
-import FileUpload from "./FileUpload";
-import PictureIcon from "./Icon/Picture";
+import { ChangeEvent, useRef } from 'react';
+import { User } from '../db';
+import FileUpload from './FileUpload';
+import PictureIcon from './Icon/Picture';
 
 interface IPicture {
   chatId: number;
@@ -38,8 +38,8 @@ export default function Picture(props: IPicture) {
       <PictureIcon onClick={selectPicture} />
       <FileUpload
         ref={fileUploadRef}
-        type="file"
-        accept=".jpg,.jpeg,.png"
+        type='file'
+        accept='.jpg,.jpeg,.png'
         onChange={handleSelectPicture}
       />
     </>

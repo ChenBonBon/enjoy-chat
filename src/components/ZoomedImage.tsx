@@ -1,5 +1,5 @@
-import { styled } from "styled-components";
-import CloseIcon from "./Icon/Close";
+import { styled } from 'styled-components';
+import CloseIcon from './Icon/Close';
 
 interface IZoomedImage {
   image: string;
@@ -28,7 +28,7 @@ export default function ZoomedImage(props: IZoomedImage) {
   return (
     <Wrapper>
       <ZoomedImageCloseIcon onClick={props.onClose} />
-      <img src={props.image} width="100%" />
+      <img src={props.image} width='100%' />
     </Wrapper>
   );
 }

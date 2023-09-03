@@ -1,14 +1,14 @@
-import { db } from "../db";
+import { db } from '../db';
 
 async function getChat(from: number, to: number) {
   try {
     const relation = await db.chats
-      .where(["from", "to"])
+      .where(['from', 'to'])
       .equals([from, to])
       .first();
     return relation;
   } catch (error) {
-    console.error("getChat error: ", error);
+    console.error('getChat error: ', error);
   }
 }
 
@@ -29,14 +29,14 @@ export async function addChat(from: number, to: number) {
 
     return chatId;
   } catch (error) {
-    console.error("AddChat error: ", error);
+    console.error('AddChat error: ', error);
   }
 }
 
 export async function addChatText(
   chatId: number,
   text: string,
-  createdBy: number
+  createdBy: number,
 ) {
   try {
     await db.chatContents.add({
@@ -46,14 +46,14 @@ export async function addChatText(
       createdBy,
     });
   } catch (error) {
-    console.error("AddChatText error: ", error);
+    console.error('AddChatText error: ', error);
   }
 }
 
 export async function addChatImage(
   chatId: number,
   image: string,
-  createdBy: number
+  createdBy: number,
 ) {
   try {
     await db.chatContents.add({
@@ -63,7 +63,7 @@ export async function addChatImage(
       createdBy,
     });
   } catch (error) {
-    console.error("AddChatImage error: ", error);
+    console.error('AddChatImage error: ', error);
   }
 }
 
@@ -74,7 +74,7 @@ export async function addChatLike(chatContentId: number, createdBy: number) {
       createdBy,
     });
   } catch (error) {
-    console.error("AddChatLike error: ", error);
+    console.error('AddChatLike error: ', error);
   }
 }
 
@@ -82,7 +82,7 @@ export async function removeChatLike(id: number) {
   try {
     await db.chatLikes.delete(id);
   } catch (error) {
-    console.error("RemoveChatLike error: ", error);
+    console.error('RemoveChatLike error: ', error);
   }
 }
 
@@ -90,7 +90,7 @@ export async function removeChatContent(id: number) {
   try {
     await db.chatContents.delete(id);
   } catch (error) {
-    console.error("RemoveChatContent error: ", error);
+    console.error('RemoveChatContent error: ', error);
   }
 }
 
@@ -101,7 +101,7 @@ export async function addChatDelete(chatContentId: number, createdBy: number) {
       createdBy,
     });
   } catch (error) {
-    console.error("AddChatDelete error: ", error);
+    console.error('AddChatDelete error: ', error);
   }
 }
 
@@ -109,6 +109,6 @@ export async function removeChatDelete(id: number) {
   try {
     await db.chatDeletes.delete(id);
   } catch (error) {
-    console.error("RemoveChatDelete error: ", error);
+    console.error('RemoveChatDelete error: ', error);
   }
 }

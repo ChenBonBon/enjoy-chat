@@ -19,16 +19,16 @@ function scrollToBottom(element: HTMLDivElement) {
     });
     element.scrollTo(
       0,
-      currentScroll + (scrollHeight - currentScroll - clientHeight) / 2
+      currentScroll + (scrollHeight - currentScroll - clientHeight) / 2,
     );
   }
 }
 
 export function scrollToBottomObserverCallback(
-  mutationsList: MutationRecord[]
+  mutationsList: MutationRecord[],
 ) {
   for (const mutation of mutationsList) {
-    if (mutation.type === "childList") {
+    if (mutation.type === 'childList') {
       if (mutation.addedNodes.length > 0) {
         if (mutation.target.nodeType === 1) {
           const parentElement = mutation.target.parentElement

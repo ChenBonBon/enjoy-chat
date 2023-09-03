@@ -1,4 +1,4 @@
-import { db } from "../db";
+import { db } from '../db';
 
 export async function addRelation(from: number, to: number, createdAt: number) {
   try {
@@ -13,26 +13,26 @@ export async function addRelation(from: number, to: number, createdAt: number) {
       createdAt,
     });
   } catch (error) {
-    console.error("AddFriend error: ", error);
+    console.error('AddFriend error: ', error);
   }
 }
 
 async function getRelation(from: number, to: number) {
   try {
     const relation = await db.userRelations
-      .where(["from", "to"])
+      .where(['from', 'to'])
       .equals([from, to])
       .first();
     return relation;
   } catch (error) {
-    console.error("GetFriend error: ", error);
+    console.error('GetFriend error: ', error);
   }
 }
 
 export async function removeRelation(from: number, to: number) {
   try {
-    await db.userRelations.where(["from", "to"]).equals([from, to]).delete();
+    await db.userRelations.where(['from', 'to']).equals([from, to]).delete();
   } catch (error) {
-    console.error("RemoveFriend error: ", error);
+    console.error('RemoveFriend error: ', error);
   }
 }
