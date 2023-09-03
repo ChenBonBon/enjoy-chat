@@ -15,11 +15,15 @@ import { blank } from '../utils';
 export default function Friends() {
   const navigate = useNavigate();
   const params = useParams();
+  // 用户 id
   const from = Number(params.id);
 
+  // 查询好友信息
   const { friends, friendIds } = useFriends(from);
+  // 查询推荐用户
   const { recommendUsers } = useRecommend(from, friendIds);
 
+  // 好友列表操作
   const getFriendActions = useCallback(
     (userId: number) => {
       return [
@@ -40,6 +44,7 @@ export default function Friends() {
     [from, navigate],
   );
 
+  // 推荐用户列表操作
   const getRecommendUserActions = useCallback(
     (userId: number) => {
       return [
@@ -56,6 +61,7 @@ export default function Friends() {
     [from],
   );
 
+  // 好友列表
   const friendList = useMemo(() => {
     return (friends ?? []).map((user) => {
       return (
@@ -68,6 +74,7 @@ export default function Friends() {
     });
   }, [friends, getFriendActions]);
 
+  // 推荐用户列表
   const recommendUserList = useMemo(() => {
     return (recommendUsers ?? []).map((user) => {
       return (
@@ -80,6 +87,11 @@ export default function Friends() {
     });
   }, [getRecommendUserActions, recommendUsers]);
 
+  /**
+   * 返回并退出登录
+   *
+   * @param {string} from - 用户当前的状态
+   */
   async function back() {
     window.localStorage.removeItem('userId');
     await updateUser(from, 'offline');

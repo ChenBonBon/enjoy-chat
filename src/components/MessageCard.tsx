@@ -10,6 +10,12 @@ interface IMessageCard {
   likeId?: number;
 }
 
+/**
+ * 渲染消息卡組件。
+ *
+ * @param {IMessageCard} props - 消息卡組件的屬性。
+ * @return {JSX.Element} 渲染的消息卡組件。
+ */
 export default function MessageCard(props: IMessageCard) {
   return (
     <Content {...props}>
@@ -19,8 +25,7 @@ export default function MessageCard(props: IMessageCard) {
         )}
         <Callout.Root
           color={props.myMessage ? 'green' : 'gray'}
-          style={{ flex: 1 }}
-        >
+          style={{ flex: 1 }}>
           <Callout.Text>{props.text}</Callout.Text>
         </Callout.Root>
         {!props.myMessage && (

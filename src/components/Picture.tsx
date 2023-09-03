@@ -10,15 +10,33 @@ interface IPicture {
   onChange?: (result: string | ArrayBuffer | null) => void;
 }
 
+/**
+ * 渲染一个Picture组件。
+ *
+ * @param {IPicture} props - Picture组件的props。
+ * @return {ReactElement} 渲染后的Picture组件。
+ */
 export default function Picture(props: IPicture) {
+  // 文件上传 DOM
   const fileUploadRef = useRef<HTMLInputElement>(null);
 
+  /**
+   * 选择图片，通过点击文件上传引用元素。
+   *
+   * @return {void}
+   */
   function selectPicture() {
     if (fileUploadRef.current) {
       fileUploadRef.current.click();
     }
   }
 
+  /**
+   * 处理选择图片事件。
+   *
+   * @param {ChangeEvent<HTMLInputElement>} event - 选择图片事件。
+   * @return {void}
+   */
   function handleSelectPicture(event: ChangeEvent<HTMLInputElement>) {
     if (event.currentTarget.files) {
       const file = event.currentTarget.files[0];

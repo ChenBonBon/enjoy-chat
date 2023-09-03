@@ -1,3 +1,9 @@
+/**
+ * 用户状态
+ *
+ * online: 在线
+ * offline: 离线
+ */
 export const StatusMap: {
   [key: string]: {
     label: string;
@@ -35,6 +41,13 @@ export const StatusMap: {
   offline: { label: '离线', action: '上线', color: 'red' },
 };
 
+/**
+ * 用户列表
+ *
+ * name: 用户名
+ * description: 用户介绍
+ * avatar: 用户头像
+ */
 export const userList = [
   {
     name: 'BonBon',

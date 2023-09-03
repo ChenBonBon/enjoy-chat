@@ -3,19 +3,14 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { useMemo } from 'react';
 import Button from '../components/Button';
 import { LoginUserCard } from '../components/LoginUserCard';
-import { userList } from '../constants.ts';
 import { db } from '../db';
-import { addUser } from '../requests/user.ts';
-
-function importUser() {
-  Promise.all(
-    userList.map((user) => addUser(user.name, user.description, user.avatar)),
-  );
-}
+import { importUser } from '../utils.ts';
 
 export default function Users() {
+  // 查询用户
   const users = useLiveQuery(() => db.users.toArray());
 
+  // 用户列表
   const userList = useMemo(() => {
     return (users ?? []).map((user) => {
       return <LoginUserCard key={user.id} {...user} />;

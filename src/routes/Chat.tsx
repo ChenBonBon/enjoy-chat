@@ -15,14 +15,23 @@ import { getRandomTime } from '../utils';
 export default function Chat() {
   const navigate = useNavigate();
   const params = useParams();
+  // 聊天 id
   const chatId = Number(params.id);
+  // 当前用户 id
   const currentUserId = Number(localStorage.getItem('userId'));
 
+  // 输入的内容
   const [text, setText] = useState('');
 
+  // 查询聊天内容
   const { contents } = useContents(currentUserId, chatId);
+  // 查询聊天好友信息
   const { user } = useChat(currentUserId, chatId);
 
+  /**
+   * 发送聊天消息。
+   *
+   */
   function send() {
     if (text.length === 0) return;
     addChatText(chatId, text, currentUserId);
@@ -35,6 +44,11 @@ export default function Chat() {
     }, getRandomTime(3000));
   }
 
+  /**
+   * 发送图片到聊天。
+   *
+   * @param {string | ArrayBuffer | null} result - 图片的结果。
+   */
   function sendPicture(result: string | ArrayBuffer | null) {
     if (result && typeof result === 'string') {
       addChatImage(chatId, result, currentUserId);
@@ -46,6 +60,9 @@ export default function Chat() {
     }
   }
 
+  /**
+   * 返回到好友列表页面。
+   */
   function back() {
     navigate(`/users/${currentUserId}/friends`);
   }

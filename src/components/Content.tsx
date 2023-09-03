@@ -16,6 +16,12 @@ const Wrapper = styled.div<{ $myMessage?: boolean; className?: string }>`
   float: ${({ $myMessage }) => ($myMessage ? 'right' : 'left')};
 `;
 
+/**
+ * 渲染消息卡片的内容。
+ *
+ * @param {IMessageCard} props - 消息卡片的属性。
+ * @return {JSX.Element} - 渲染后的内容。
+ */
 export default function Content(props: IMessageCard) {
   return (
     <Wrapper $myMessage={props.myMessage} className={props.className}>

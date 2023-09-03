@@ -17,13 +17,28 @@ const Image = styled.img`
   width: calc(100% - 64px);
 `;
 
+/**
+ * 渲染一个 ImageCard 组件。
+ *
+ * @param {IImageCard} props - ImageCard 组件的属性。
+ * @return {JSX.Element} 渲染的 ImageCard 组件。
+ */
 export default function ImageCard(props: IImageCard) {
+  // 是否放大图片
   const [zoomed, setZoomed] = useState(false);
 
+  /**
+   * 放大图片
+   *
+   */
   function zoomIn() {
     setZoomed(true);
   }
 
+  /**
+   * 缩小图片
+   *
+   */
   function zoomOut() {
     setZoomed(false);
   }

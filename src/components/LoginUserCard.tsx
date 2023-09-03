@@ -10,18 +10,34 @@ import DownIcon from './Icon/Down';
 import UpIcon from './Icon/Up';
 import UserCard from './UserCard';
 
+/**
+ * 渲染用于登录的用户卡片组件。
+ *
+ * @param {User} props - 包含用户详细信息的用户对象。
+ * @return {JSX.Element} 渲染的用户卡片组件。
+ */
 export function LoginUserCard(props: User) {
   const navigate = useNavigate();
+  // 登录弹窗状态
   const [opened, setOpened] = useState(false);
 
+  /*
+   * 打开登录弹窗
+   */
   function open() {
     setOpened(true);
   }
 
+  /*
+   * 关闭登录弹窗
+   */
   function cancel() {
     setOpened(false);
   }
 
+  /*
+   * 登录
+   */
   async function handleSelectUser() {
     await updateUser(props.id!, 'online');
     cancel();
@@ -29,6 +45,9 @@ export function LoginUserCard(props: User) {
     navigate(`/users/${props.id}/friends`);
   }
 
+  /*
+   * 改变用户状态
+   */
   async function handleChangeStatus(event: MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     const status = props.status === 'online' ? 'offline' : 'online';

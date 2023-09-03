@@ -24,6 +24,12 @@ const ZoomedImageCloseIcon = styled(CloseIcon)`
   color: white;
 `;
 
+/**
+ * 渲染一个带有放大功能的图片，并包含关闭图标和指定的图片来源。
+ *
+ * @param {IZoomedImage} props - 包含图片来源和关闭回调函数的 props 对象。
+ * @return {JSX.Element} 渲染的放大图片组件。
+ */
 export default function ZoomedImage(props: IZoomedImage) {
   return (
     <Wrapper>

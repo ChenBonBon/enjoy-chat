@@ -23,6 +23,12 @@ const Wrapper = styled(Card)`
   cursor: pointer;
 `;
 
+/**
+ * 渲染用户卡片组件。
+ *
+ * @param {IUserCard} props - 包含用户卡片数据的props对象。
+ * @return {JSX.Element} 渲染的用户卡片组件。
+ */
 export default function UserCard(props: IUserCard) {
   return (
     <Wrapper onClick={props.onClick}>

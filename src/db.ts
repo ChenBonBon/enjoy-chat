@@ -1,5 +1,6 @@
 import Dexie, { Table } from 'dexie';
 
+// 用户信息表结构
 export interface User {
   id?: number;
   name: string;
@@ -8,6 +9,7 @@ export interface User {
   status: 'online' | 'offline';
 }
 
+// 用户关系表结构
 export interface UserRelation {
   id?: number;
   from: number;
@@ -15,6 +17,7 @@ export interface UserRelation {
   createdAt: number;
 }
 
+// 聊天信息表结构
 export interface Chat {
   id?: number;
   from: number;
@@ -22,6 +25,7 @@ export interface Chat {
   createdAt: number;
 }
 
+// 聊天内容表结构
 export interface ChatContent {
   id?: number;
   chatId: number;
@@ -31,12 +35,14 @@ export interface ChatContent {
   createdBy: number;
 }
 
+// 聊天点赞表结构
 export interface ChatLike {
   id?: number;
   chatContentId: number;
   createdBy: number;
 }
 
+// 聊天删除表结构
 export interface ChatDelete {
   id?: number;
   chatContentId: number;

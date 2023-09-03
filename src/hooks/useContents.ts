@@ -3,9 +3,18 @@ import { useEffect, useState } from 'react';
 import { IContent } from '../components/ChatContents';
 import { db } from '../db';
 
+/**
+ * 检索给定用户和聊天的内容。
+ *
+ * @param {number} userId - 用户的ID。
+ * @param {number} chatId - 聊天的ID。
+ * @return {object} 包含检索到的内容的对象。
+ */
 export default function useContents(userId: number, chatId: number) {
+  // 聊天内容列表
   const [contents, setContents] = useState<IContent[]>([]);
 
+  // 获取聊天内容
   const chatContents = useLiveQuery(async () => {
     return await db.chatContents
       .where('chatId')
@@ -13,6 +22,7 @@ export default function useContents(userId: number, chatId: number) {
       .sortBy('createdAt');
   }, [chatId]);
 
+  // 获取用户的聊天点赞
   const myChatLikes = useLiveQuery(async () => {
     const chatContentIds = (chatContents ?? []).map(
       (chatContent) => chatContent.id!,
@@ -24,6 +34,7 @@ export default function useContents(userId: number, chatId: number) {
       .toArray();
   }, [chatContents]);
 
+  // 获取用户的聊天删除
   const myChatDeletes = useLiveQuery(async () => {
     const chatContentIds = (chatContents ?? []).map(
       (chatContent) => chatContent.id!,
@@ -35,6 +46,7 @@ export default function useContents(userId: number, chatId: number) {
       .toArray();
   }, [chatContents]);
 
+  // 向聊天内容中移除掉已删除掉聊天内容，并添加点赞信息
   useEffect(() => {
     const newContents: IContent[] = [];
 
