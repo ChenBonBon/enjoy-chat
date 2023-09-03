@@ -12,12 +12,11 @@ import useContents from "../hooks/useContents";
 import { addChatImage, addChatText } from "../requests/chat";
 import { getRandomTime } from "../utils";
 
-const currentUserId = Number(localStorage.getItem("userId"));
-
 export default function Chat() {
   const navigate = useNavigate();
   const params = useParams();
   const chatId = Number(params.id);
+  const currentUserId = Number(localStorage.getItem("userId"));
 
   const [text, setText] = useState("");
 

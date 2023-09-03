@@ -47,3 +47,4 @@
 ### Fixed
 
 - 修复 Input 组件在受控情况下无法输入中文
+- 修复切换用户 currentUser 未更新

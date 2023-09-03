@@ -20,29 +20,29 @@ interface IChatContents {
   contents?: IContent[];
 }
 
-const currentUserId = Number(localStorage.getItem("userId"));
 const observer = new MutationObserver(scrollToBottomObserverCallback);
-
-function toggleLike(contentId: number, id?: number) {
-  if (id) {
-    removeChatLike(Number(id));
-  } else {
-    addChatLike(Number(contentId), currentUserId);
-  }
-}
 
 function revoke(id: number) {
   removeChatContent(id);
 }
 
-function deleteMessage(contentId: number) {
-  addChatDelete(Number(contentId), currentUserId);
-}
-
 export default function ChatContents(props: IChatContents) {
+  const currentUserId = Number(localStorage.getItem("userId"));
   const chatContentRef = useRef<HTMLDivElement>(null);
 
   const { windowSize } = useWindowSize();
+
+  function deleteMessage(contentId: number) {
+    addChatDelete(Number(contentId), currentUserId);
+  }
+
+  function toggleLike(contentId: number, id?: number) {
+    if (id) {
+      removeChatLike(Number(id));
+    } else {
+      addChatLike(Number(contentId), currentUserId);
+    }
+  }
 
   useEffect(() => {
     if (chatContentRef.current) {
